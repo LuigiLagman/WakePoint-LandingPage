@@ -1,38 +1,40 @@
-function DownloadSection() {
-  return (
-    <section
-      id="download"
-      className="grid min-h-[18rem] gap-4 rounded-[1.75rem] border border-white/10 bg-white/6 p-7 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-md lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:p-8"
-    >
-      <div>
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-amber-300">
-          Download
-        </p>
-        <h2 className="text-2xl font-semibold text-[#f4efe8] sm:text-3xl">
-          Add your app file or asset link here when the final version is ready.
-        </h2>
-        <p className="mt-4 max-w-2xl leading-7 text-[#f4efe8]/76">
-          This section can point users to a PDF, a launch page, or any other
-          resource your team wants to highlight.
-        </p>
-      </div>
+import React from 'react';
+import container from "../assets/images/rocket_as_one.png";
+import underlineImage from "../assets/images/underline_2.svg";
 
-      <div className="grid gap-3 sm:grid-cols-2">
-        <a
-          className="inline-flex min-h-12 items-center justify-center rounded-full bg-amber-300 px-5 font-semibold text-[#17181f] transition-transform duration-150 hover:-translate-y-0.5"
-          href="#footer"
-        >
-          Go to footer
-        </a>
-        <a
-          className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/20 bg-white/5 px-5 font-semibold text-[#f4efe8] transition-transform duration-150 hover:-translate-y-0.5"
-          href="/"
-        >
-          Placeholder link
-        </a>
+export default function CommuteBanner() {
+  return (
+    <div className="relative w-full my-36 overflow-visible">
+      <div
+        className="relative w-full overflow-visible rounded-3xl p-16 text-center"
+      >
+        <img 
+          src={container}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-[100%] max-w-none -translate-x-1/2 -translate-y-1/2"
+        />
+
+        <div className="relative z-10 flex flex-col items-center justify-center gap-6">
+          <h2 className="text-2xl md:text-4xl font-semibold text-white tracking-wide drop-shadow-sm">
+            Ready for{' '}
+            <span className="relative inline-block">
+              stress-free commuting?
+              {/* Green underline element */}
+              <img
+                src={underlineImage}
+                alt=""
+                className="absolute left-0 -bottom-1 w-full h-1 object-cover overflow-visible"
+              />
+            </span>
+          </h2>
+
+          <button className="px-18 mt-4 py-3 bg-linear-to-b from-[#DAF3B6] to-[#84D716] hover:from-[#e2f2cc] hover:to-[#add677] text-slate-800 font-black uppercase tracking-wider rounded-lg shadow-[0_8px_0_0_#6CA126] active:translate-y-0.5 active:shadow-[0_3px_0_0_#6CA126] transition-all cursor-pointer">
+            Download
+          </button>
+        </div>
+
       </div>
-    </section>
+    </div>
   );
 }
-
-export default DownloadSection;

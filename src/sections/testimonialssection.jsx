@@ -1,3 +1,5 @@
+import qouteIcon from "../assets/images/qoutes.png";
+
 const testimonials = [
   {
     name: 'Ariana',
@@ -17,27 +19,38 @@ const testimonials = [
     quote:
       'Splitting each section into its own file keeps updates straightforward.',
   },
+  {
+    name: 'Jules',
+    role: 'Operations',
+    quote:
+      'The sideways carousel feels lighter and makes each testimonial easier to scan.',
+  },
 ];
 
 function TestimonialsSection() {
   return (
-    <section
-      id="testimonials"
-      className="grid gap-4 rounded-[1.75rem] border border-white/10 bg-white/6 p-7 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-md lg:grid-cols-3 lg:p-8"
-      aria-label="Testimonials"
-    >
-      {testimonials.map((item) => (
-        <article
-          className="rounded-[1.35rem] border border-white/10 bg-black/15 p-6"
-          key={item.name}
-        >
-          <p className="text-sm leading-7 text-[#f4efe8]/82">{item.quote}</p>
-          <div className="mt-5">
-            <h2 className="text-lg font-semibold text-[#f4efe8]">{item.name}</h2>
-            <p className="text-sm text-[#f4efe8]/65">{item.role}</p>
-          </div>
-        </article>
-      ))}
+    <section id="testimonials" className="w-full" aria-label="Testimonials">
+      <div className="flex gap-4 mt-30 overflow-x-auto pb-3 pr-4 snap-x snap-mandatory scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20">
+        {testimonials.map((item) => (
+          <article
+            className="min-w-[82%] snap-start rounded-[1.35rem] bg-[#FAF9F7] py-20 px-6 flex flex-col min-h-104"
+            key={item.name}
+          >
+            <img
+              src={qouteIcon}
+              alt=""
+              className="w-8"
+            />
+            <p className="mt-8 flex-1 text-2xl leading-7 font-bold text-[#2A3435]">
+              {item.quote}
+            </p>
+            <div className="mt-8 pt-6">
+              <h3 className="text-lg font-semibold text-[#2A3435]">{item.name}</h3>
+              <p className="text-lg text-[#9CA1A0]/65">{item.role}</p>
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }
