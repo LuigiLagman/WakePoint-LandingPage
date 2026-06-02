@@ -4,22 +4,69 @@ function FooterSection() {
   return (
     <footer
       id="footer"
-      className="flex min-h-[12rem] flex-col items-start justify-between gap-4 rounded-[1.75rem] border border-white/10 bg-white/6 p-7 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-md lg:flex-row lg:items-center"
+      className="flex flex-row items-start bg-gradient-to-b from-transparent to-[#B3EA63] lg:items-center"
     >
-      <div>
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-amber-300">
-          Footer
-        </p>
-        <img src={companyIcon} alt="WakePoint company icon" className="w-80 h-auto"/>
-        <h2 className="text-2xl font-semibold text-[#f4efe8] sm:text-3xl">
-          Built as a modular React landing page.
-        </h2>
+      <div className="ml-30">
+        <img src={companyIcon} alt="WakePoint company icon" className="w-68 h-auto"/>
       </div>
 
-      <p className="max-w-xl text-sm leading-7 text-[#f4efe8]/72">
-        Each section now lives in its own file, so the structure is easy to edit,
-        replace, or expand later.
-      </p>
+      <div className="flex flex-row ml-30 justify-between gap-40">
+        <div>
+          <p className="text-sm font-bold text-[#2A3435]">
+            Company
+          </p>
+          <a>
+            <p className="text-sm text-[#2A3435] hover:text-[#637677] cursor-pointer">
+              About Us
+            </p>
+          </a>
+          <a>
+            <p className="text-sm text-[#2A3435] hover:text-[#637677] cursor-pointer">
+              Contact Us
+            </p>
+          </a>
+          <a>
+            <p className="text-sm text-[#2A3435] hover:text-[#637677] cursor-pointer">
+              FAQs
+            </p>
+          </a>
+        </div>
+        <div>
+          <p className="text-sm font-bold text-[#2A3435]">
+            Resources
+          </p>
+          <a>
+            <p className="text-sm text-[#2A3435] hover:text-[#637677] cursor-pointer">
+              Privacy Policy
+            </p>
+          </a>
+          <a>
+            <p className="text-sm text-[#2A3435] hover:text-[#637677] cursor-pointer">
+              Terms & Conditions
+            </p>
+          </a>
+          <a>
+            <p className="text-sm text-[#2A3435] hover:text-[#637677] cursor-pointer">
+              Support Center
+            </p>
+          </a>
+        </div>
+        <div>
+          <p className="text-sm font-bold text-[#2A3435]">
+            Community
+          </p>
+          <a>
+            <p className="text-sm text-[#2A3435] hover:text-[#637677] cursor-pointer">
+              GitHub
+            </p>
+          </a>
+          <a>
+            <p className="text-sm text-[#2A3435] hover:text-[#637677] cursor-pointer">
+              Discord
+            </p>
+          </a>
+        </div>
+      </div>
     </footer>
   );
 }
