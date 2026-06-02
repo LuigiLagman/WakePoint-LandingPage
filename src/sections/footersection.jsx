@@ -1,3 +1,5 @@
+import companyIcon from "../assets/images/company_icon.png";
+
 function FooterSection() {
   return (
     <footer
@@ -8,6 +10,7 @@ function FooterSection() {
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-amber-300">
           Footer
         </p>
+        <img src={companyIcon} alt="WakePoint company icon" className="w-80 h-auto"/>
         <h2 className="text-2xl font-semibold text-[#f4efe8] sm:text-3xl">
           Built as a modular React landing page.
         </h2>

@@ -5,8 +5,12 @@
     BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: #f4efe8;
   background:
-    radial-gradient(circle at top, rgba(255, 194, 87, 0.22), transparent 34%),
-    linear-gradient(180deg, #101114 0%, #17181f 52%, #0d0e12 100%);
+    url('assets\images\pattern_1.png');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
