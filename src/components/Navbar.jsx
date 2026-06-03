@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import favicon from '../assets/images/favicon.png';
 
 const navItems = [
+  { label: 'Home', href: '#hero' },
   { label: 'Why WakePoint', href: '#problem' },
   { label: 'How It Works', href: '#process' },
   { label: 'Features', href: '#pricing' },
@@ -14,6 +15,7 @@ function Navbar() {
   const [isHovered, setIsHovered] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isContactPage = window.location.pathname === '/contact';
   const isProgrammaticScrollRef = useRef(false);
   const programmaticScrollTimeoutRef = useRef(null);
 
@@ -21,6 +23,13 @@ function Navbar() {
 
   const scrollToSection = (event, hash) => {
     event.preventDefault();
+
+    if (isContactPage) {
+      window.history.pushState({}, '', '/');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
 
     const target = document.querySelector(hash);
 
@@ -131,7 +140,7 @@ function Navbar() {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className="relative isolate w-full overflow-hidden border-x-0 border-t-0 px-4 py-2.5 text-[#2f3134] transition-colors duration-300 sm:px-5 sm:py-3 lg:px-8"
-        style={{ width: '100vw' }}
+        style={{ width: '100%' }}
       >
         {/* Default semi-radial gradient - always visible */}
         <div

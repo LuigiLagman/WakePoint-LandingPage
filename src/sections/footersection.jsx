@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import companyIcon from "../assets/images/company_icon.png";
 import { useState, useEffect } from "react";
 
-function FooterSection() {
+function FooterSection({ onContactSection }) {
   const [hoveredLink, setHoveredLink] = useState(null);
   const [year, setYear] = useState(new Date().getFullYear());
 
@@ -10,12 +10,12 @@ function FooterSection() {
     Company: [
       { name: "About Us", href: "/about", icon: "🏢" },
       { name: "Contact Us", href: "/contact", icon: "📧" },
-      { name: "FAQs", href: "/faqs", icon: "❓" },
+      { name: "FAQs", href: "https://discordapp.com/channels/1511650006937899109/1511658823784337529", icon: "❓", external: true },
     ],
     Resources: [
       { name: "Privacy Policy", href: "/privacy", icon: "🔒" },
       { name: "Terms & Conditions", href: "/terms", icon: "📜" },
-      { name: "Support Center", href: "/support", icon: "🎧" },
+      { name: "Support Center", href: "https://discordapp.com/channels/1511650006937899109/1511652153859510282", icon: "🎧", external: true },
     ],
     Community: [
       { name: "GitHub", href: "https://github.com", icon: "🐙", external: true },
@@ -37,9 +37,11 @@ function FooterSection() {
     if (external) {
       window.open(href, '_blank', 'noopener,noreferrer');
     } else {
-      // Handle internal navigation
-      // navigate(href);
-      console.log(`Navigate to ${href}`);
+      if (href === "/contact" && onContactSection) {
+        onContactSection();
+      } else {
+        console.log(`Navigate to ${href}`);
+      }
     }
   };
 
@@ -71,7 +73,7 @@ function FooterSection() {
   return (
     <footer
       id="footer"
-      className="relative overflow-hidden bg-gradient-to-b from-transparent via-[#9cf543] to-[#B3EA63]"
+      className="relative overflow-hidden bg-linear-to-b from-transparent via-[#9cf543] to-[#B3EA63]"
     >
       
       
@@ -115,7 +117,7 @@ function FooterSection() {
             className="flex flex-wrap gap-8 sm:gap-12 md:gap-16 lg:gap-20 w-full lg:w-auto"
           >
             {Object.entries(footerLinks).map(([category, links]) => (
-              <motion.div key={category} variants={itemVariants} className="min-w-[140px]">
+              <motion.div key={category} variants={itemVariants} className="min-w-35">
                 <motion.p
                   className="text-sm font-extrabold uppercase tracking-wider text-[#2A3435] mb-4 relative inline-block"
                   whileHover={{ x: 2 }}
@@ -189,10 +191,10 @@ function FooterSection() {
             
             <div className="flex gap-6">
               <a
-                href="#"
+                  href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  handleLinkClick("Cookie Preferences", "#", false);
+                    handleLinkClick("Cookie Preferences", "#", false);
                 }}
                 className="hover:text-[#84D716] transition-colors cursor-pointer"
               >

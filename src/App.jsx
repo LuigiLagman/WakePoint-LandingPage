@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Navbar from "./components/Navbar";
 import HeroSection from "./sections/HeroSection";
@@ -8,17 +8,38 @@ import PricingSection from "./sections/PricingSection";
 import TestimonialsSection from "./sections/TestimonialsSection";
 import DownloadSection from "./sections/DownloadSection";
 import FooterSection from "./sections/FooterSection";
+import ContactSection from "./sections/ContactSection";
 
 import FeatureDropOverlay from "./components/FeatureDropOverlay";
 
 function App() {
   const [showFeatures, setShowFeatures] = useState(false);
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  const navigate = (path) => {
+    if (window.location.pathname !== path) {
+      window.history.pushState({}, "", path);
+      setCurrentPath(path);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const isContactPage = currentPath === "/contact";
 
   return (
     <div className="relative min-h-screen text-[#f4efe8]">
 
       {/* background gradient (non-vh, scroll-based illusion) */}
-      <div className="pointer-events-none absolute inset-x-0 top-[100vh] h-[120rem] bg-gradient-to-b from-[#FAF9F7] to-transparent -z-10" />
+      <div className="pointer-events-none absolute inset-x-0 top-[100vh] h-480 bg-linear-to-b from-[#FAF9F7] to-transparent -z-10" />
 
       {/* OVERLAY (gravity PNG system) */}
       <FeatureDropOverlay
@@ -29,19 +50,25 @@ function App() {
       <Navbar />
 
       <main>
-        <HeroSection />
+        {isContactPage ? (
+          <ContactSection onBackHome={() => navigate("/")} />
+        ) : (
+          <>
+            <HeroSection />
 
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 pb-6 pt-2 sm:px-5 lg:px-6 lg:pb-8">
-          <ProblemSection
-            onTriggerFeatures={() => setShowFeatures(true)}
-          />
-          <ProcessSection />
-          <PricingSection />
-          <TestimonialsSection />
-          <DownloadSection />
-        </div>
+            <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 pb-6 pt-2 sm:px-5 lg:px-6 lg:pb-8">
+              <ProblemSection
+                onTriggerFeatures={() => setShowFeatures(true)}
+              />
+              <ProcessSection />
+              <PricingSection />
+              <TestimonialsSection />
+              <DownloadSection />
+            </div>
 
-        <FooterSection />
+            <FooterSection onContactSection={() => navigate("/contact")} />
+          </>
+        )}
       </main>
     </div>
   );
