@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import HeroSection from "./sections/HeroSection";
 import ProblemSection from "./sections/ProblemSection";
 import ProcessSection from "./sections/ProcessSection";
-import FeaturesSection from "./sections/FeaturesSection";
+import PricingSection from "./sections/PricingSection";
 import TestimonialsSection from "./sections/TestimonialsSection";
 import DownloadSection from "./sections/DownloadSection";
 import FooterSection from "./sections/FooterSection";
@@ -36,7 +36,7 @@ function App() {
             onTriggerFeatures={() => setShowFeatures(true)}
           />
           <ProcessSection />
-          <FeaturesSection />
+          <PricingSection />
           <TestimonialsSection />
           <DownloadSection />
         </div>
