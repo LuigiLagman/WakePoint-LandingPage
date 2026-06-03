@@ -262,7 +262,7 @@ export default function CommuteBanner() {
                 className="text-white/40 text-xs flex items-center gap-1"
               >
                 <span>↓</span>
-                <span>Join thousands of users</span>
+                <span>Be A User Today!</span>
                 <span>↓</span>
               </motion.div>
             </motion.div>
