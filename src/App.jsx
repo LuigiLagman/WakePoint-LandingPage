@@ -10,6 +10,8 @@ import DownloadSection from "./sections/DownloadSection";
 import FooterSection from "./sections/FooterSection";
 import ContactSection from "./sections/ContactSection";
 import PrivacyPolicySection from "./sections/PrivacyPolicySection";
+import TermsSection from "./sections/TermsSection";
+import AboutSection from "./sections/AboutSection";
 
 import FeatureDropOverlay from "./components/FeatureDropOverlay";
 import patternOne from "./assets/images/pattern_1.png";
@@ -36,8 +38,49 @@ function App() {
     }
   };
 
+  // Define all page routes
   const isContactPage = currentPath === "/contact";
   const isPrivacyPage = currentPath === "/privacy";
+  const isTermsPage = currentPath === "/terms";
+  const isAboutPage = currentPath === "/about";
+
+  // Don't show background gradient on any of the separate pages
+  const shouldShowBackground = !isContactPage && !isPrivacyPage && !isTermsPage && !isAboutPage;
+
+  // Render the appropriate page component
+  const renderPage = () => {
+    if (isContactPage) {
+      return <ContactSection onBackHome={() => navigate("/")} />;
+    }
+    if (isPrivacyPage) {
+      return <PrivacyPolicySection onBackHome={() => navigate("/")} />;
+    }
+    if (isTermsPage) {
+      return <TermsSection onBackHome={() => navigate("/")} />;
+    }
+    if (isAboutPage) {
+      return <AboutSection onBackHome={() => navigate("/")} />;
+    }
+    // Home page
+    return (
+      <>
+        <HeroSection />
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 pb-6 pt-2 sm:px-5 lg:px-6 lg:pb-8">
+          <ProblemSection onTriggerFeatures={() => setShowFeatures(true)} />
+          <ProcessSection />
+          <PricingSection />
+          <TestimonialsSection />
+          <DownloadSection />
+        </div>
+        <FooterSection
+          onContactSection={() => navigate("/contact")}
+          onPrivacySection={() => navigate("/privacy")}
+          onTermsSection={() => navigate("/terms")}
+          onAboutSection={() => navigate("/about")}
+        />
+      </>
+    );
+  };
 
   return (
     <div className="relative min-h-screen text-[#f4efe8]">
@@ -52,8 +95,8 @@ function App() {
         style={{ backgroundImage: `url(${patternTwo})` }}
       />
 
-      {/* background gradient (non-vh, scroll-based illusion) - only show when not on contact page */}
-      {!isContactPage && (
+      {/* background gradient - only show on home page */}
+      {shouldShowBackground && (
         <div className="pointer-events-none absolute inset-x-0 top-[100vh] h-480 bg-linear-to-b from-[#FAF9F7] to-transparent -z-10" />
       )}
 
@@ -63,34 +106,10 @@ function App() {
         onClear={() => setShowFeatures(false)}
       />
 
-      <Navbar />
+      {/* Pass navigate function to Navbar */}
+      <Navbar navigate={navigate} currentPath={currentPath} />
 
-      <main>
-        {isContactPage ? (
-          <ContactSection onBackHome={() => navigate("/")} />
-        ) : isPrivacyPage ? (
-          <PrivacyPolicySection onBackHome={() => navigate("/")} />
-        ) : (
-          <>
-            <HeroSection />
-
-            <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 pb-6 pt-2 sm:px-5 lg:px-6 lg:pb-8">
-              <ProblemSection
-                onTriggerFeatures={() => setShowFeatures(true)}
-              />
-              <ProcessSection />
-              <PricingSection />
-              <TestimonialsSection />
-              <DownloadSection />
-            </div>
-
-            <FooterSection
-              onContactSection={() => navigate("/contact")}
-              onPrivacySection={() => navigate("/privacy")}
-            />
-          </>
-        )}
-      </main>
+      <main>{renderPage()}</main>
     </div>
   );
 }
