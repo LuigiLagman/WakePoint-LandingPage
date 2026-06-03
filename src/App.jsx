@@ -11,6 +11,8 @@ import FooterSection from "./sections/FooterSection";
 import ContactSection from "./sections/ContactSection";
 
 import FeatureDropOverlay from "./components/FeatureDropOverlay";
+import patternOne from "./assets/images/pattern_1.png";
+import patternTwo from "./assets/images/pattern_2.png";
 
 function App() {
   const [showFeatures, setShowFeatures] = useState(false);
@@ -37,6 +39,16 @@ function App() {
 
   return (
     <div className="relative min-h-screen text-[#f4efe8]">
+      <div
+        aria-hidden="true"
+        className="parallax-layer parallax-layer--far fixed inset-0 -z-20"
+        style={{ backgroundImage: `url(${patternOne})` }}
+      />
+      <div
+        aria-hidden="true"
+        className="parallax-layer parallax-layer--near fixed inset-0 -z-20"
+        style={{ backgroundImage: `url(${patternTwo})` }}
+      />
 
       {/* background gradient (non-vh, scroll-based illusion) */}
       <div className="pointer-events-none absolute inset-x-0 top-[100vh] h-480 bg-linear-to-b from-[#FAF9F7] to-transparent -z-10" />
