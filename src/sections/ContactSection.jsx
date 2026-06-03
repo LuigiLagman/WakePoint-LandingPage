@@ -26,13 +26,14 @@ function ContactSection({ onBackHome }) {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
+    <section id="contact" className="relative min-h-screen overflow-hidden">
       <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-[#FAF9F7] via-white to-[#F6F4EE]" />
       <div className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full bg-[#84D716]/10 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-16 -left-16 h-80 w-80 rounded-full bg-[#ADCE7D]/15 blur-3xl" />
 
-      <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+      {/* Flex container for centering - changed to min-h-screen */}
+      <div className="relative mx-auto flex min-h-screen w-full max-w-6xl items-center px-4 sm:px-6 lg:px-8">
+        <div className="grid w-full gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.28em] text-[#84D716]">
               Contact Us

@@ -38,8 +38,10 @@ function App() {
   return (
     <div className="relative min-h-screen text-[#f4efe8]">
 
-      {/* background gradient (non-vh, scroll-based illusion) */}
-      <div className="pointer-events-none absolute inset-x-0 top-[100vh] h-480 bg-linear-to-b from-[#FAF9F7] to-transparent -z-10" />
+      {/* background gradient (non-vh, scroll-based illusion) - only show when not on contact page */}
+      {!isContactPage && (
+        <div className="pointer-events-none absolute inset-x-0 top-[100vh] h-480 bg-linear-to-b from-[#FAF9F7] to-transparent -z-10" />
+      )}
 
       {/* OVERLAY (gravity PNG system) */}
       <FeatureDropOverlay
