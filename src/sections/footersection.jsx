@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import companyIcon from "../assets/images/company_icon.png";
 import { useState, useEffect } from "react";
 
-function FooterSection({ onContactSection }) {
+function FooterSection({ onContactSection, onAboutSection }) { // Add onAboutSection prop
   const [hoveredLink, setHoveredLink] = useState(null);
   const [year, setYear] = useState(new Date().getFullYear());
 
@@ -37,8 +37,11 @@ function FooterSection({ onContactSection }) {
     if (external) {
       window.open(href, '_blank', 'noopener,noreferrer');
     } else {
+      // Handle internal navigation
       if (href === "/contact" && onContactSection) {
         onContactSection();
+      } else if (href === "/about" && onAboutSection) { // Add about navigation
+        onAboutSection();
       } else {
         console.log(`Navigate to ${href}`);
       }

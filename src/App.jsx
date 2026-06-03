@@ -9,6 +9,7 @@ import TestimonialsSection from "./sections/TestimonialsSection";
 import DownloadSection from "./sections/DownloadSection";
 import FooterSection from "./sections/FooterSection";
 import ContactSection from "./sections/ContactSection";
+import AboutSection from "./sections/AboutSection"; // Import AboutSection
 
 import FeatureDropOverlay from "./components/FeatureDropOverlay";
 
@@ -34,12 +35,16 @@ function App() {
   };
 
   const isContactPage = currentPath === "/contact";
+  const isAboutPage = currentPath === "/about"; // Add about page check
+
+  // Don't show background gradient on contact or about pages
+  const shouldShowBackground = !isContactPage && !isAboutPage;
 
   return (
     <div className="relative min-h-screen text-[#f4efe8]">
 
-      {/* background gradient (non-vh, scroll-based illusion) - only show when not on contact page */}
-      {!isContactPage && (
+      {/* background gradient - only show when not on contact or about page */}
+      {shouldShowBackground && (
         <div className="pointer-events-none absolute inset-x-0 top-[100vh] h-480 bg-linear-to-b from-[#FAF9F7] to-transparent -z-10" />
       )}
 
@@ -54,6 +59,8 @@ function App() {
       <main>
         {isContactPage ? (
           <ContactSection onBackHome={() => navigate("/")} />
+        ) : isAboutPage ? ( // Add about page condition
+          <AboutSection onBackHome={() => navigate("/")} />
         ) : (
           <>
             <HeroSection />
@@ -68,7 +75,10 @@ function App() {
               <DownloadSection />
             </div>
 
-            <FooterSection onContactSection={() => navigate("/contact")} />
+            <FooterSection 
+              onContactSection={() => navigate("/contact")}
+              onAboutSection={() => navigate("/about")}  // Add this line
+            />
           </>
         )}
       </main>
