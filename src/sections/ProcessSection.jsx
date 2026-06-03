@@ -1,7 +1,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import mapImg from "../assets/images/map_ss.png";
-import mockup from "../assets/images/mockup_2.png";
+import mockup from "../assets/images/mockup_4.png";
+import phoneMockup from "../assets/images/phone_mockup.png";
 
 function ProcessSection() {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -77,14 +78,14 @@ function ProcessSection() {
     <section
       id="process"
       ref={sectionRef}
-      className="relative py-16 sm:py-20 lg:py-24 overflow-hidden rounded-3xl"
+      className="relative py-8 sm:py-12 lg:py-16 overflow-hidden rounded-3xl"
     >
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#FAF9F7] via-white to-[#FAF9F7] pointer-events-none rounded-3xl" />
+      <div className="absolute inset-0 pointer-events-none rounded-3xl" />
       
       {/* Animated background blobs */}
       <motion.div
-        className="absolute -top-40 -right-40 w-96 h-96 bg-[#84D716]/5 rounded-full blur-3xl pointer-events-none"
+        className="absolute -top-40 -right-40 w-96 h-96  rounded-full blur-3xl pointer-events-none"
         animate={{
           x: [0, 30, 0],
           y: [0, -20, 0],
@@ -96,7 +97,7 @@ function ProcessSection() {
         }}
       />
       <motion.div
-        className="absolute -bottom-40 -left-40 w-96 h-96 bg-[#ADCE7D]/5 rounded-full blur-3xl pointer-events-none"
+        className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full blur-3xl pointer-events-none"
         animate={{
           x: [0, -30, 0],
           y: [0, 20, 0],
@@ -115,7 +116,7 @@ function ProcessSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16 lg:mb-20"
+          className="text-center mb-8 lg:mb-12"
         >
           <motion.div 
             className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-wider text-[#84D716] mb-3"
@@ -129,7 +130,7 @@ function ProcessSection() {
           </motion.div>
           
           <motion.h2 
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#2A3435] font-['Fredoka'] mb-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#2A3435] font-['Fredoka'] mb-3"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -152,7 +153,7 @@ function ProcessSection() {
 
         {/* Main Content Container */}
         <div className="relative rounded-[2rem] overflow-visible">
-          {/* Map Background (taller band, positioned lower so it extends under the cards) */}
+          {/* Map Background with transparent to #145E4D at 20% opacity */}
           <motion.div
             className="absolute left-1/2 top-28 -translate-x-1/2 w-[92%] max-w-[1200px] h-[300px] sm:h-[420px] pointer-events-none rounded-[2rem] overflow-hidden z-0"
             style={{ scale: mapScale }}
@@ -160,21 +161,22 @@ function ProcessSection() {
             <img
               src={mapImg}
               alt="Map background"
-              className="h-full w-full object-cover opacity-30"
+              className="h-full w-full object-cover opacity-50"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#FAF9F7]/95 via-[#FAF9F7]/80 to-[#FAF9F7]/95" />
+            {/* Gradient overlay - transparent at top to #145E4D with 20% opacity at bottom */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#145E4D]/20" />
           </motion.div>
 
-          {/* Phone Mockup - Overflowing outside */}
+          {/* Phone Mockup - mockup_4.png inside phone_mockup.png */}
           <motion.div
             variants={mockupVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             style={{ y: mockupY, rotate: mockupRotate }}
-            className="relative z-20 flex justify-center -mt-6 mb-8 lg:-mt-8"
+            className="relative z-20 flex justify-center -mt-4 mb-6 lg:-mt-6"
           >
-            <div className="relative group">
+            <div className="relative group" style={{ width: '98%', maxWidth: '280px' }}>
               {/* Glow effect */}
               <motion.div
                 className="absolute -inset-8 bg-gradient-to-r from-[#84D716]/30 to-[#ADCE7D]/30 rounded-[3rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -188,24 +190,26 @@ function ProcessSection() {
                 }}
               />
               
-              {/* Phone frame */}
-              <div className="relative w-[280px] sm:w-[320px] lg:w-[340px]">
-                <div className="relative rounded-[2.5rem] border-[6px] border-[#2A3435] bg-[#2A3435] shadow-2xl">
-                  {/* Dynamic Island */}
-                  <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-[#1a1a1a] rounded-full z-20" />
-                  
-                  {/* Screen content */}
-                  <div className="relative rounded-[2rem] overflow-hidden bg-white aspect-[9/19]">
-                    <img 
-                      src={mockup} 
-                      alt="App mockup showing WakePoint interface" 
-                      className="h-full w-full object-cover"
-                    />
-                    
-                    {/* Screen reflection overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
-                  </div>
+              {/* Container for layered images */}
+              <div className="relative w-full">
+                {/* Phone frame (top layer) */}
+                <img 
+                  src={phoneMockup} 
+                  alt="Phone frame" 
+                  className="relative w-full h-auto object-contain z-20"
+                />
+                
+                {/* App screenshot (bottom layer) - positioned inside the phone screen */}
+                <div className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-[2rem] z-10">
+                  <img 
+                    src={mockup} 
+                    alt="App interface" 
+                    className="w-[98%] h-full object-cover"
+                  />
                 </div>
+                
+                {/* Screen reflection overlay */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none rounded-[2rem] z-30" />
               </div>
             </div>
           </motion.div>
@@ -216,7 +220,7 @@ function ProcessSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            className="relative z-20 grid gap-6 md:gap-8 lg:grid-cols-3 mt-16 lg:mt-20 px-0"
+            className="relative z-20 grid gap-6 md:gap-8 lg:grid-cols-3 mt-12 lg:mt-16 px-0"
           >
             {steps.map((step, index) => (
               <motion.div

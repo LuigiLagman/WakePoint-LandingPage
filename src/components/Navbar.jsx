@@ -5,7 +5,7 @@ import favicon from '../assets/images/favicon.png';
 const navItems = [
   { label: 'Why WakePoint', href: '#problem' },
   { label: 'How It Works', href: '#process' },
-  { label: 'Features', href: '#features' },
+  { label: 'Features', href: '#pricing' },
   { label: 'Reviews', href: '#testimonials' },
 ];
 
@@ -41,12 +41,23 @@ function Navbar() {
       isProgrammaticScrollRef.current = false;
     }, 800);
 
-    // Scroll to center for all sections including download
-    target.scrollIntoView({ 
-      behavior: 'smooth', 
-      block: 'center', 
-      inline: 'nearest' 
-    });
+    // Check if it's the "How It Works" section (#process)
+    if (hash === '#process') {
+      // Scroll to top for How It Works section
+      target.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start', 
+        inline: 'nearest' 
+      });
+    } else {
+      // Scroll to center for all other sections
+      target.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center', 
+        inline: 'nearest' 
+      });
+    }
+    
     history.replaceState(null, '', hash);
   };
 
