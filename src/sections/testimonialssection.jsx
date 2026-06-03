@@ -2,28 +2,28 @@ import qouteIcon from "../assets/images/qoutes.png";
 
 const testimonials = [
   {
-    name: 'Ariana',
-    role: 'Product lead',
+    name: 'Chloe Bersales',
+    role: 'Student',
     quote:
-      'The structure makes the page feel polished without getting too busy.',
+      'I no longer worry about missing my stop after class, even if I fall asleep during my commute.',
   },
   {
-    name: 'Marco',
-    role: 'Designer',
+    name: 'Marc Chester Perez',
+    role: 'Student',
     quote:
-      'The uneven section sizes give the layout more rhythm and movement.',
+      'I can finally nap during my commute without constantly checking my phone.',
   },
   {
-    name: 'Nina',
-    role: 'Developer',
+    name: 'Gabriel Ian Santos',
+    role: 'Student',
     quote:
-      'Splitting each section into its own file keeps updates straightforward.',
+      'The route deviation alert helped me notice I boarded the wrong jeep.',
   },
   {
-    name: 'Jules',
-    role: 'Operations',
+    name: 'Luigi Lagman',
+    role: 'Student',
     quote:
-      'The sideways carousel feels lighter and makes each testimonial easier to scan.',
+      'As someone unfamiliar with Manila routes, WakePoint gave me peace of mind during my trip.',
   },
 ];
 
@@ -33,7 +33,7 @@ function TestimonialsSection() {
       <div className="flex gap-4 mt-30 overflow-x-auto pb-3 pr-4 snap-x snap-mandatory scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20">
         {testimonials.map((item) => (
           <article
-            className="min-w-[82%] snap-start rounded-[1.35rem] bg-[#FAF9F7] py-20 px-6 flex flex-col min-h-104"
+            className="min-w-[30%] snap-start rounded-[1.35rem] bg-[#FAF9F7] py-8 px-6 flex flex-col"
             key={item.name}
           >
             <img
@@ -44,7 +44,7 @@ function TestimonialsSection() {
             <p className="mt-8 flex-1 text-2xl leading-7 font-bold text-[#2A3435]">
               {item.quote}
             </p>
-            <div className="mt-8 pt-6">
+            <div className="mt-4 pt-6">
               <h3 className="text-lg font-semibold text-[#2A3435]">{item.name}</h3>
               <p className="text-lg text-[#9CA1A0]/65">{item.role}</p>
             </div>
