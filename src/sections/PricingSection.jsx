@@ -401,11 +401,6 @@ function PricingSection() {
               <span className="text-[#84D716] text-lg">🔒</span>
               <span>Secure payment</span>
             </span>
-            <span className="w-px h-4 bg-[#2A3435]/10 hidden sm:block" />
-            <span className="flex items-center gap-2">
-              <span className="text-[#84D716] text-lg">⭐</span>
-              <span>4.9/5 from 500+ users</span>
-            </span>
           </div>
         </motion.div>
 

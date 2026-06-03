@@ -19,7 +19,7 @@ function FooterSection() {
     ],
     Community: [
       { name: "GitHub", href: "https://github.com", icon: "🐙", external: true },
-      { name: "Discord", href: "https://discord.com", icon: "💬", external: true },
+      { name: "Discord", href: "https://discord.gg/KxGh5WYpuX", icon: "💬", external: true },
     ],
   };
 
@@ -224,7 +224,7 @@ function FooterSection() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            Made with <span className="inline-block animate-pulse">❤️</span> for Filipino commuters
+            Made with <span className="inline-block animate-pulse">❤️</span> for commuters
           </motion.p>
         </motion.div>
       </div>
