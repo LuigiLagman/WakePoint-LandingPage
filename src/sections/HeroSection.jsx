@@ -1,9 +1,19 @@
 import { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
 import pattern2 from '../assets/images/pattern_2.png';
 import titleTypography from '../assets/images/title_typography.png';
+// Import all mockup images
 import mockup1 from '../assets/images/mockup_1.png';
+import mockup2 from '../assets/images/mockup_2.png';
+import mockup3 from '../assets/images/mockup_3.png';
+import mockup4 from '../assets/images/mockup_4.png';
+import mockup5 from '../assets/images/mockup_5.png';
+import mockup6 from '../assets/images/mockup_6.png';
+import phoneMockup from '../assets/images/phone_mockup.png';
+
+// Array of mockup images to cycle through
+const mockupImages = [mockup1, mockup2, mockup3, mockup4, mockup5, mockup6];
 
 // Extracted animation variants
 const container = {
@@ -60,6 +70,7 @@ function HeroSection() {
   const [pressed, setPressed] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const parallaxY = useParallax(0.25);
   const { scrollYProgress } = useScroll();
   
@@ -77,12 +88,24 @@ function HeroSection() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Cycle through images with proper crossfade (no empty gap)
+  useEffect(() => {
+    if (!imagesLoaded) return;
+
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => {
+        // Cycle: 0,1,2,3,4,5, then back to 0
+        return (prevIndex + 1) % mockupImages.length;
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [imagesLoaded]);
+
   // Track button click for analytics
   const handleDownloadClick = () => {
-    // Replace with your actual analytics implementation
     console.log('Analytics: CTA clicked in hero section');
     
-    // Example: Google Analytics
     if (typeof window.gtag !== 'undefined') {
       window.gtag('event', 'click', {
         event_category: 'engagement',
@@ -90,10 +113,30 @@ function HeroSection() {
         value: 1
       });
     }
-    
-    // Add your download logic here
-    // window.open('/download', '_blank');
   };
+
+  // Preload images
+  useEffect(() => {
+    const allImages = [...mockupImages, phoneMockup, titleTypography, pattern2];
+    let loadedCount = 0;
+    
+    allImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === allImages.length) {
+          setImagesLoaded(true);
+        }
+      };
+      img.onerror = () => {
+        loadedCount++;
+        if (loadedCount === allImages.length) {
+          setImagesLoaded(true);
+        }
+      };
+    });
+  }, []);
 
   return (
     <section
@@ -115,8 +158,8 @@ function HeroSection() {
         }}
       />
 
-      {/* Gradient overlay with fade-in */}
-      <motion.div
+      {/* Gradient overlay - ANIMATION REMOVED (no more fade-in) */}
+      <div
         className="
           pointer-events-none absolute inset-0
           bg-gradient-to-b
@@ -124,9 +167,6 @@ function HeroSection() {
           via-white/60
           to-[#FAF9F7]
         "
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, delay: 0.2 }}
       />
 
       {/* Loading skeleton */}
@@ -155,7 +195,6 @@ function HeroSection() {
             className="w-full max-w-[620px] h-auto"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
-            onLoad={() => setImagesLoaded(true)}
             loading="eager"
           />
 
@@ -191,7 +230,7 @@ function HeroSection() {
               className="
                 relative z-10
                 inline-flex min-h-[48px] items-center justify-center
-                rounded-[1.1rem]
+                rounded-xl
                 px-10 sm:px-12
 
                 text-[1.05rem] sm:text-[1.12rem]
@@ -229,9 +268,9 @@ function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* RIGHT MOCKUP */}
+        {/* RIGHT MOCKUP - Phone frame with seamless crossfade */}
         <motion.div
-          className="flex w-full justify-center lg:w-auto lg:justify-end"
+          className="relative flex w-full justify-center lg:w-auto lg:justify-end"
           initial={{ opacity: 0, x: 60, rotate: -8, scale: 0.92 }}
           animate={{
             opacity: imagesLoaded ? 1 : 0,
@@ -250,35 +289,52 @@ function HeroSection() {
             transition: { duration: 0.3 },
           }}
         >
-          <motion.img
-            src={mockup1}
-            alt="App mockup showing the sleep tracking interface"
-            className="w-full max-w-[350px] lg:max-w-[280px]"
-            style={{
-              filter: `drop-shadow(0 26px 40px rgba(0,0,0,0.18))`,
-            }}
-            animate={{
-              y: [0, isMobile ? -5 : -10, 0],
-              filter: [
-                "drop-shadow(0 26px 40px rgba(0,0,0,0.18))",
-                "drop-shadow(0 32px 48px rgba(0,0,0,0.22))",
-                "drop-shadow(0 26px 40px rgba(0,0,0,0.18))",
-              ]
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-            }}
-            whileHover={{
-              scale: 1.03,
-              rotate: 2,
-              transition: { duration: 0.3 },
-            }}
-            onLoad={() => setImagesLoaded(true)}
-            loading="lazy"
-          />
+          <div className="relative w-full max-w-[320px] lg:max-w-[260px]">
+            {/* Screen content container with background to prevent transparency */}
+            <div className="absolute inset-0 z-0 rounded-[2rem] overflow-hidden bg-[#1a1a2e]">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={currentImageIndex}
+                  src={mockupImages[currentImageIndex]}
+                  alt={`App mockup screen ${currentImageIndex + 1}`}
+                  className="w-full h-full object-cover"
+                  style={{ 
+                    objectPosition: 'center',
+                  }}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 0.98 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ 
+                    duration: 0.5, 
+                    ease: "easeInOut"
+                  }}
+                />
+              </AnimatePresence>
+            </div>
+
+            {/* Phone frame image - on top of the screen content */}
+            <motion.img
+              src={phoneMockup}
+              alt="Phone frame"
+              className="relative w-full h-auto z-10 pointer-events-none"
+              style={{
+                filter: `drop-shadow(0 26px 40px rgba(0,0,0,0.18))`,
+              }}
+              animate={{
+                filter: [
+                  "drop-shadow(0 26px 40px rgba(0,0,0,0.18))",
+                  "drop-shadow(0 32px 48px rgba(0,0,0,0.22))",
+                  "drop-shadow(0 26px 40px rgba(0,0,0,0.18))",
+                ]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut",
+              }}
+            />
+          </div>
         </motion.div>
       </motion.div>
 

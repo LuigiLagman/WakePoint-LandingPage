@@ -110,11 +110,8 @@ function PricingSection() {
   };
 
   return (
-    <section id="pricing" className="relative py-16 sm:py-20 lg:py-24 overflow-hidden mt-20">
+    <section id="pricing" className="relative py-8 sm:py-12 lg:py-16 overflow-hidden mt-10">
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#FAF9F7] via-white to-[#FAF9F7] pointer-events-none rounded-3xl" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#84D716]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#ADCE7D]/5 rounded-full blur-3xl pointer-events-none" />
       
       <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}

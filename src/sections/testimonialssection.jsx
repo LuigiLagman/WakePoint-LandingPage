@@ -80,7 +80,7 @@ function TestimonialsSection() {
 
   return (
     <section id="testimonials" className="w-full" aria-label="Testimonials">
-      <div className="relative mt-20 overflow-hidden px-4 py-10 sm:px-6 lg:px-10">
+      <div className="relative overflow-hidden px-4 py-8 sm:py-12 lg:py-16">
         <div className="absolute inset-x-0 top-0 h-24 bg-linear-to-b from-white/10 to-transparent" />
 
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-8">
