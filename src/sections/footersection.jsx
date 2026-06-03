@@ -18,7 +18,7 @@ function FooterSection({ onContactSection, onPrivacySection }) {
       { name: "Support Center", href: "https://discordapp.com/channels/1511650006937899109/1511652153859510282", icon: "🎧", external: true },
     ],
     Community: [
-      { name: "GitHub", href: "https://github.com", icon: "🐙", external: true },
+      { name: "GitHub", href: "https://github.com/Chago16/wakepoint", icon: "🐙", external: true },
       { name: "Discord", href: "https://discord.gg/KxGh5WYpuX", icon: "💬", external: true },
     ],
   };
