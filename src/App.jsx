@@ -9,6 +9,7 @@ import TestimonialsSection from "./sections/TestimonialsSection";
 import DownloadSection from "./sections/DownloadSection";
 import FooterSection from "./sections/FooterSection";
 import ContactSection from "./sections/ContactSection";
+import PrivacyPolicySection from "./sections/PrivacyPolicySection";
 
 import FeatureDropOverlay from "./components/FeatureDropOverlay";
 import patternOne from "./assets/images/pattern_1.png";
@@ -36,6 +37,7 @@ function App() {
   };
 
   const isContactPage = currentPath === "/contact";
+  const isPrivacyPage = currentPath === "/privacy";
 
   return (
     <div className="relative min-h-screen text-[#f4efe8]">
@@ -66,6 +68,8 @@ function App() {
       <main>
         {isContactPage ? (
           <ContactSection onBackHome={() => navigate("/")} />
+        ) : isPrivacyPage ? (
+          <PrivacyPolicySection onBackHome={() => navigate("/")} />
         ) : (
           <>
             <HeroSection />
@@ -80,7 +84,10 @@ function App() {
               <DownloadSection />
             </div>
 
-            <FooterSection onContactSection={() => navigate("/contact")} />
+            <FooterSection
+              onContactSection={() => navigate("/contact")}
+              onPrivacySection={() => navigate("/privacy")}
+            />
           </>
         )}
       </main>
