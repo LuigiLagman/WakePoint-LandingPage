@@ -184,7 +184,7 @@ function FooterSection({ onContactSection, onPrivacySection }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.5 }}
-          className="mt-12 pt-8 border-t border-[#2A3435]/10"
+          className="mt-8 pt-8 border-t border-[#2A3435]/10"
         >
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-[#2A3435]/50">
             <p>
@@ -223,7 +223,7 @@ function FooterSection({ onContactSection, onPrivacySection }) {
           
           {/* Made with love */}
           <motion.p
-            className="text-center mt-4 text-xs text-[#2A3435]/40"
+            className="text-center mt-0 text-xs text-[#2A3435]/40"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
