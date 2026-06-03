@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import companyIcon from "../assets/images/company_icon.png";
 import { useState, useEffect } from "react";
 
-function FooterSection({ onContactSection, onPrivacySection }) {
+function FooterSection({ onContactSection, onPrivacySection, onTermsSection, onAboutSection }) {
   const [hoveredLink, setHoveredLink] = useState(null);
   const [year, setYear] = useState(new Date().getFullYear());
 
@@ -37,11 +37,15 @@ function FooterSection({ onContactSection, onPrivacySection }) {
     if (external) {
       window.open(href, '_blank', 'noopener,noreferrer');
     } else {
-      // Handle internal navigation
+      // Handle internal navigation for all four pages
       if (href === "/contact" && onContactSection) {
         onContactSection();
       } else if (href === "/privacy" && onPrivacySection) {
         onPrivacySection();
+      } else if (href === "/terms" && onTermsSection) {
+        onTermsSection();
+      } else if (href === "/about" && onAboutSection) {
+        onAboutSection();
       } else {
         console.log(`Navigate to ${href}`);
       }
