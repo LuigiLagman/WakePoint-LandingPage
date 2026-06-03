@@ -410,7 +410,7 @@ function PricingSection() {
           transition={{ delay: 0.5 }}
         >
           <a
-            href="#faq"
+            href="https://discordapp.com/channels/1511650006937899109/1511663835143082055"
             className="text-sm text-[#84D716] hover:text-[#6CA126] transition-colors inline-flex items-center gap-1"
           >
             Have questions about pricing?

@@ -4,10 +4,6 @@
   font-family: 'Quicksand', ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: #f4efe8;
-  background-image: url('assets/images/pattern_1.png');
-  background-repeat: repeat;
-  background-position: top left;
-  background-attachment: fixed;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -46,4 +42,51 @@ h6,
 
 #root {
   min-height: 100vh;
+}
+
+.parallax-layer {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background-repeat: repeat;
+  background-position: 0 0;
+  background-size: 720px auto;
+  will-change: background-position;
+}
+
+.parallax-layer--far {
+  opacity: 0.28;
+  animation: parallax-drift-far 120s linear infinite;
+}
+
+.parallax-layer--near {
+  opacity: 0.14;
+  background-size: 560px auto;
+  animation: parallax-drift-near 72s linear infinite reverse;
+}
+
+@keyframes parallax-drift-far {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0 720px;
+  }
+}
+
+@keyframes parallax-drift-near {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 560px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-layer {
+    animation: none;
+  }
 }

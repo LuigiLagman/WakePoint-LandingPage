@@ -9,9 +9,12 @@ import TestimonialsSection from "./sections/TestimonialsSection";
 import DownloadSection from "./sections/DownloadSection";
 import FooterSection from "./sections/FooterSection";
 import ContactSection from "./sections/ContactSection";
+import PrivacyPolicySection from "./sections/PrivacyPolicySection";
 import AboutSection from "./sections/AboutSection"; // Import AboutSection
 
 import FeatureDropOverlay from "./components/FeatureDropOverlay";
+import patternOne from "./assets/images/pattern_1.png";
+import patternTwo from "./assets/images/pattern_2.png";
 
 function App() {
   const [showFeatures, setShowFeatures] = useState(false);
@@ -35,13 +38,19 @@ function App() {
   };
 
   const isContactPage = currentPath === "/contact";
-  const isAboutPage = currentPath === "/about"; // Add about page check
-
-  // Don't show background gradient on contact or about pages
-  const shouldShowBackground = !isContactPage && !isAboutPage;
 
   return (
     <div className="relative min-h-screen text-[#f4efe8]">
+      <div
+        aria-hidden="true"
+        className="parallax-layer parallax-layer--far fixed inset-0 -z-20"
+        style={{ backgroundImage: `url(${patternOne})` }}
+      />
+      <div
+        aria-hidden="true"
+        className="parallax-layer parallax-layer--near fixed inset-0 -z-20"
+        style={{ backgroundImage: `url(${patternTwo})` }}
+      />
 
       {/* background gradient - only show when not on contact or about page */}
       {shouldShowBackground && (
@@ -59,8 +68,6 @@ function App() {
       <main>
         {isContactPage ? (
           <ContactSection onBackHome={() => navigate("/")} />
-        ) : isAboutPage ? ( // Add about page condition
-          <AboutSection onBackHome={() => navigate("/")} />
         ) : (
           <>
             <HeroSection />
@@ -75,10 +82,7 @@ function App() {
               <DownloadSection />
             </div>
 
-            <FooterSection 
-              onContactSection={() => navigate("/contact")}
-              onAboutSection={() => navigate("/about")}  // Add this line
-            />
+            <FooterSection onContactSection={() => navigate("/contact")} />
           </>
         )}
       </main>
