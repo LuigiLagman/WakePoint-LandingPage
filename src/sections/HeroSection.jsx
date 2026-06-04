@@ -65,7 +65,7 @@ function useParallax(speed = 0.25) {
   return scrollY * speed;
 }
 
-function HeroSection() {
+function HeroSection({ onNavigateToAbout }) {
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -88,13 +88,41 @@ function HeroSection() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Cycle through images with proper crossfade (no empty gap)
+  // Function to scroll to next section
+  const scrollToNextSection = () => {
+    // Try to find the about section or features section
+    const aboutSection = document.getElementById('about');
+    const featuresSection = document.getElementById('features');
+    const nextSection = aboutSection || featuresSection;
+    
+    if (nextSection) {
+      // Get navbar height if exists
+      const navbar = document.querySelector('nav') || document.querySelector('header');
+      const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
+      
+      // Calculate position to scroll to
+      const elementPosition = nextSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    } else {
+      // Fallback: scroll by one viewport height
+      window.scrollBy({
+        top: window.innerHeight - 80, // Subtract approximate navbar height
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Cycle through images with proper crossfade
   useEffect(() => {
     if (!imagesLoaded) return;
 
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => {
-        // Cycle: 0,1,2,3,4,5, then back to 0
         return (prevIndex + 1) % mockupImages.length;
       });
     }, 3000);
@@ -158,7 +186,7 @@ function HeroSection() {
         }}
       />
 
-      {/* Gradient overlay - ANIMATION REMOVED (no more fade-in) */}
+      {/* Gradient overlay */}
       <div
         className="
           pointer-events-none absolute inset-0
@@ -343,14 +371,11 @@ function HeroSection() {
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 cursor-pointer"
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-        onClick={() => {
-          const nextSection = document.getElementById('features') || document.querySelector('section:nth-of-type(2)');
-          nextSection?.scrollIntoView({ behavior: 'smooth' });
-        }}
+        onClick={scrollToNextSection}
         role="button"
         aria-label="Scroll down"
         tabIndex={0}
-        onKeyPress={(e) => e.key === 'Enter' && document.querySelector('section:nth-of-type(2)')?.scrollIntoView({ behavior: 'smooth' })}
+        onKeyPress={(e) => e.key === 'Enter' && scrollToNextSection()}
       >
         <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
           <motion.div 

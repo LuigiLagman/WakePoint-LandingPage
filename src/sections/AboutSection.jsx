@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useRef } from "react";
+// Import the favicon image
+import favicon from "../assets/images/favicon.png"; // Adjust this path based on your actual file location
 
 function AboutSection({ onBackHome }) {
   const [hoveredPartner, setHoveredPartner] = useState(null);
@@ -184,7 +186,7 @@ function AboutSection({ onBackHome }) {
             </motion.div>
           </motion.div>
 
-          {/* Story Section */}
+          {/* Story Section with Favicon - Rating removed */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
@@ -205,12 +207,25 @@ function AboutSection({ onBackHome }) {
                   stops due to fatigue, distractions, and unpredictable transit conditions.
                 </p>
               </div>
+              {/* Larger animated circular favicon - Perfect circle, no borders */}
               <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                animate={{ 
+                  rotate: 360,
+                  scale: [1, 1.08, 1]
+                }}
+                transition={{ 
+                  rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                  scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                }}
                 className="hidden md:block"
               >
-                <div className="text-9xl">🇵🇭</div>
+                <div className="rounded-full overflow-hidden shadow-xl">
+                  <img 
+                    src={favicon}
+                    alt="WakePoint Logo" 
+                    className="h-48 w-48 object-cover"
+                  />
+                </div>
               </motion.div>
             </div>
           </motion.div>

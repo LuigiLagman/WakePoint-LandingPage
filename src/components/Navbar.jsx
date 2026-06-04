@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from 'motion/react';
 import favicon from '../assets/images/favicon.png';
 
 const navItems = [
-  { label: 'Home', href: '#hero' },
-  { label: 'Why WakePoint', href: '#problem' },
-  { label: 'How It Works', href: '#process' },
-  { label: 'Features', href: '#pricing' },
-  { label: 'Reviews', href: '#testimonials' },
+  { label: 'Home', href: '#hero', sectionId: 'hero' },
+  { label: 'Why WakePoint', href: '#problem', sectionId: 'problem' },
+  { label: 'How It Works', href: '#process', sectionId: 'process' },
+  { label: 'Features', href: '#pricing', sectionId: 'pricing' }, // href goes to #pricing, but label shows "Features"
+  { label: 'Reviews', href: '#testimonials', sectionId: 'testimonials' },
 ];
 
 function Navbar({ navigate, currentPath: propCurrentPath }) {
@@ -19,7 +19,7 @@ function Navbar({ navigate, currentPath: propCurrentPath }) {
   const isProgrammaticScrollRef = useRef(false);
   const programmaticScrollTimeoutRef = useRef(null);
 
-  const navSectionIds = ['hero', 'problem', 'process', 'features', 'testimonials', 'download'];
+  const navSectionIds = ['hero', 'problem', 'process', 'pricing', 'testimonials', 'download'];
 
   // Check if we're on a separate page
   const isSeparatePage = ['/contact', '/about', '/privacy', '/terms'].includes(currentPath);
@@ -52,7 +52,7 @@ function Navbar({ navigate, currentPath: propCurrentPath }) {
     setIsMobileMenuOpen(false);
   };
 
-  const scrollToSection = (event, hash) => {
+  const scrollToSection = (event, hash, sectionId) => {
     event.preventDefault();
 
     // If on a separate page, navigate home first then scroll
@@ -72,7 +72,8 @@ function Navbar({ navigate, currentPath: propCurrentPath }) {
             block: hash === '#process' ? 'start' : 'center', 
             inline: 'nearest' 
           });
-          setActiveSection(hash.slice(1));
+          // Set active section based on sectionId
+          setActiveSection(sectionId);
         }
       }, 100);
       setIsMobileMenuOpen(false);
@@ -87,7 +88,8 @@ function Navbar({ navigate, currentPath: propCurrentPath }) {
       return;
     }
 
-    setActiveSection(hash.slice(1));
+    // Set active section based on sectionId
+    setActiveSection(sectionId);
     isProgrammaticScrollRef.current = true;
     setIsMobileMenuOpen(false);
 
@@ -244,11 +246,11 @@ function Navbar({ navigate, currentPath: propCurrentPath }) {
               navItems.map((item) => (
                 <motion.div key={item.label} className="relative">
                   <motion.a
-                    onClick={(event) => scrollToSection(event, item.href)}
-                    aria-current={activeSection === item.href.slice(1) ? 'page' : undefined}
+                    onClick={(event) => scrollToSection(event, item.href, item.sectionId)}
+                    aria-current={activeSection === item.sectionId ? 'page' : undefined}
                     className={
                       'group relative cursor-pointer font-heading text-[0.95rem] font-medium tracking-[-0.01em] transition-colors duration-200 lg:text-[1.05rem] ' +
-                      (activeSection === item.href.slice(1)
+                      (activeSection === item.sectionId
                         ? 'text-[#2f3134]'
                         : 'text-[#2f3134]/80')
                     }
@@ -258,7 +260,7 @@ function Navbar({ navigate, currentPath: propCurrentPath }) {
                   >
                     {item.label}
                     <motion.span
-                      animate={activeSection === item.href.slice(1) ? 'active' : 'rest'}
+                      animate={activeSection === item.sectionId ? 'active' : 'rest'}
                       className="absolute inset-x-0 -bottom-1 h-px rounded-full bg-[#2f3134]"
                       variants={{
                         rest: {
@@ -301,7 +303,7 @@ function Navbar({ navigate, currentPath: propCurrentPath }) {
             {/* Download Button - only show on home page */}
             {isHomePage && (
               <a
-                onClick={(event) => scrollToSection(event, '#download')}
+                onClick={(event) => scrollToSection(event, '#download', 'download')}
                 className={
                   'inline-flex min-h-9 cursor-pointer items-center justify-center rounded-full px-4 font-heading text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_24px_rgba(47,49,52,0.14)] sm:min-h-10 sm:px-5 sm:text-base md:min-h-11 md:px-6 md:text-[1.02rem] ' +
                   (isLight
@@ -378,12 +380,12 @@ function Navbar({ navigate, currentPath: propCurrentPath }) {
                         <motion.a
                           key={item.label}
                           onClick={(event) => {
-                            scrollToSection(event, item.href);
+                            scrollToSection(event, item.href, item.sectionId);
                             setIsMobileMenuOpen(false);
                           }}
                           className={
                             'block cursor-pointer rounded-lg px-4 py-3 font-heading text-base font-medium transition-colors duration-200 ' +
-                            (activeSection === item.href.slice(1)
+                            (activeSection === item.sectionId
                               ? 'bg-[#84D716]/10 text-[#2f3134]'
                               : 'text-[#2f3134]/70 hover:bg-[#FAF9F7]')
                           }

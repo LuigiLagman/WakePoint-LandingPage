@@ -68,7 +68,7 @@ function App() {
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 pb-6 pt-2 sm:px-5 lg:px-6 lg:pb-8">
           <ProblemSection onTriggerFeatures={() => setShowFeatures(true)} />
           <ProcessSection />
-          <PricingSection />
+          <PricingSection /> {/* This already has id="pricing" inside the component */}
           <TestimonialsSection />
           <DownloadSection />
         </div>
