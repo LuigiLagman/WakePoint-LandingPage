@@ -10,19 +10,19 @@ const testimonials = [
       'I no longer worry about missing my stop after class, even if I fall asleep during my commute.',
   },
   {
-    name: 'Marc Chester Perez',
+    name: 'John Ramirez',
     role: 'Student',
     quote:
       'I can finally nap during my commute without constantly checking my phone.',
   },
   {
-    name: 'Gabriel Ian Santos',
+    name: 'Marian Redrico',
     role: 'Student',
     quote:
       'The route deviation alert helped me notice I boarded the wrong jeep.',
   },
   {
-    name: 'Luigi Lagman',
+    name: 'Dane Aldritch Datuin',
     role: 'Student',
     quote:
       'As someone unfamiliar with Manila routes, WakePoint gave me peace of mind during my trip.',
